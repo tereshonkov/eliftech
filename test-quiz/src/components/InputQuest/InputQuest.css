@@ -1,0 +1,15 @@
+.quest__input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    gap: 10px;
+}
+.wrapper__input {
+    width: 300px;
+    height: 29px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.input__header {
+    margin-left: 18px;
+}

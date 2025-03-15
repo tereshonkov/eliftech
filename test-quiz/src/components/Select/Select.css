@@ -1,0 +1,14 @@
+.select__item {
+    width: 50%;
+    padding: 5px;
+}
+.quest__select {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.select__button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}

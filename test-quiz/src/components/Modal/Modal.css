@@ -1,0 +1,41 @@
+.wrapper__modal {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(245, 244, 244);
+    z-index: 1000;
+    justify-content: space-between;
+    padding: 5%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.modal__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    width: 100vw;
+    height: 90vh;
+}
+.modal__quest {
+    display: flex;
+    align-items: end;
+    gap: 30px;
+}
+.form-btn {
+    width: 100px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.wrapper__quest {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

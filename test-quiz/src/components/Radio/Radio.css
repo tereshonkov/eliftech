@@ -1,0 +1,23 @@
+.quest__answers {
+    width: 40%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.answers__input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.input__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.input {
+    width: 300px;
+    height: 29px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
