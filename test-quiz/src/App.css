@@ -11,9 +11,7 @@
   position: relative;
 }
 .quiz__wrapper h1 {
-  /* text-align: center; */
   font-size: 2rem;
-  margin-bottom: 20px;
 }
 .quiz__items {
   padding: 3%;
@@ -66,4 +64,10 @@
 }
 .card__length {
   color: blue;
+}
+.quiz__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }

@@ -1,9 +1,9 @@
 import './Select.css';
 
-export default function Select() {
+export default function Select({ value, setValue }) {
   return (
     <div className='quest__select'>
-    <select className='select__item' value="" >
+    <select value={value} onChange={(e) => setValue(e.target.value)} className='select__item'>
         <option value="text">Text</option>
         <option value="radio">Single Choice</option>
         <option value="checkbox">Multiple Choice</option>

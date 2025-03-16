@@ -10,7 +10,7 @@
     background-color: rgb(245, 244, 244);
     z-index: 1000;
     justify-content: space-between;
-    padding: 5%;
+    padding: 3%;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -38,4 +38,34 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+}
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.close-btn {
+    position: relative;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+.item-btn, .item-btn2 {
+    display: block;
+    background-color: black;
+    height: 1px;
+    width: 30px;
+}
+.item-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    rotate: 45deg;
+}
+.item-btn2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    rotate: 135deg;
 }

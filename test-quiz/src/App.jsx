@@ -4,21 +4,26 @@ import Modal from './components/Modal'
 
 function App() {
   const [modal, setModal] = useState(false)
+  const [menu, setMenu] = useState(false)
+
 
   return (
     <section className='quiz__wrapper'>
+      <div className='quiz__header'>
       <h1 className='quiz__header'>Quiz Catalog</h1>
+      <button onClick={() => {setModal(prev => !prev)}} className='form-btn'>Create Quiz</button>
+      </div>
       <div className='quiz__items'>
         <div className='items__card'>
         <div className='quiz-menu'>
-          <button className='menu__btn'>
+          <button onClick={() => setMenu(prev => !prev)} className='menu__btn'>
           ⋮
           </button>
-          <div className='menu__select'>
+          {menu && <div className='menu__select'>
             <button onClick={() => {setModal(prev => !prev)}} className='select__btn'>Edit</button>
             <button className='select__btn'>Run</button>
             <button className='select__btn'>Delete</button>
-          </div>
+          </div>}
         </div>
             <div className='card__obj'>
             <h3 className='obj__name'>QUIZ NAME</h3>
@@ -27,7 +32,7 @@ function App() {
             <p className='card__length'>questions: 1</p>
         </div>
       </div>
-      {modal && <Modal />}
+      {modal && <Modal setModal={setModal} />}
     </section>
   )
 }
