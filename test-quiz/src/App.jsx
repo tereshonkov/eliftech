@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
 import ModalEdit from "./components/ModalEdit";
+import RunQuiz from "./components/RunQuiz";
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -10,6 +11,18 @@ function App() {
   const [quiz, setQuiz] = useState([]);
   const [modalEdit, setModalEdit] = useState(false);
   const [quizToEdit, setQuizToEdit] = useState(null);
+  const [run, setRun] = useState(false);
+  const itemOnPage = 4;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  let allPages = quiz.length / itemOnPage;
+  if (quiz.length % itemOnPage !== 0) {
+    allPages++;
+  }
+  let startPages = (currentPage - 1) * itemOnPage;
+  let endPasges = startPages + itemOnPage;
+
+  const currentQuiz = quiz.slice(startPages, endPasges);
 
   console.log(quiz);
 
@@ -42,7 +55,7 @@ function App() {
         </button>
       </div>
       <div className="wrapper">
-        {quiz.map((el) => (
+        {currentQuiz.map((el) => (
           <div key={el.id} className="quiz__items">
             <div className="items__card">
               <div className="quiz-menu">
@@ -64,7 +77,7 @@ function App() {
                     >
                       Edit
                     </button>
-                    <button className="select__btn">Run</button>
+                    <button onClick={() => setRun(prev => !prev)} className="select__btn">Run</button>
                     <button onClick={() => {handleDelite(el.id)}} className="select__btn">Delete</button>
                   </div>
                 )}
@@ -75,8 +88,17 @@ function App() {
               </div>
               <p className="card__length">questions: {el.questions.length}</p>
             </div>
+            {run && <RunQuiz setRun={setRun} array={quiz.find(q => q.id === el.id)} />}
           </div>
         ))}
+      </div>
+      <div className="btn-pagination">
+        {currentPage > 1 && (
+          <button className="pagin" onClick={() => setCurrentPage(currentPage - 1)}>prev</button>
+        )}
+        {currentPage < allPages && (
+          <button className="pagin" onClick={() => setCurrentPage(currentPage + 1)}>next</button>
+        )}
       </div>
       {modal && <Modal setQuiz={setQuiz} setModal={setModal} />}
       {modalEdit && (
@@ -85,7 +107,10 @@ function App() {
           setQuiz={setQuiz}
           quizToEdit={quizToEdit}
         />
+        
       )}
+
+
     </section>
   );
 }

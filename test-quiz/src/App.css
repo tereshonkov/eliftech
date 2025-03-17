@@ -77,3 +77,13 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+.pagin {
+  width: 100px;
+  padding: 5px;
+  cursor: pointer;
+}
+.btn-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
