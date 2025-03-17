@@ -25,7 +25,8 @@
 }
 .modal__quest {
     display: flex;
-    align-items: end;
+    flex-direction: column;
+    align-items: start;
     gap: 30px;
 }
 .form-btn {
@@ -68,4 +69,26 @@
     top: 0;
     left: 0;
     rotate: 135deg;
+}
+.name__description {
+    width: 300px;
+    height: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.quest__name {
+    margin-left: 22px;
+    display: flex;
+    gap: 50px;
+}
+.quest-box {
+    display: flex;
+    align-items: end;
+    gap: 30px;
+}
+.submit {
+    align-self: center;
+    width: 100px;
+    padding: 5px;
+    cursor: pointer;
 }

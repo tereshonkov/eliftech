@@ -2,22 +2,22 @@ import Checbox from "../CheckBox";
 import InputQuest from "../InputQuest";
 import Radio from "../Radio";
 import Select from "../Select";
-import "./Modal.css";
-import { useState, useEffect } from "react";
+import "../Modal";
+import { useEffect, useState } from "react";
 
-export default function Modal({ setModal, setQuiz }) {
-  const [quest, setQuest] = useState({
-    name: "",
-    description: "",
-    id: Date.now(),
-    questions: []
-  });
+export default function ModalEdit({ setModalEdit, setQuiz, quizToEdit }) {
 
-  const [question, setQuestion] = useState([]);
+    const [quest, setQuest] = useState({
+        ...quizToEdit, 
+        questions: [...quizToEdit.questions], 
+      });
 
-  useEffect(() => {
-    localStorage.setItem('questions', JSON.stringify(question));
-  }, [question])
+      useEffect(() => {
+        setQuest({
+          ...quizToEdit,
+          questions: [...quizToEdit.questions],
+        }); 
+      }, [quizToEdit]);
 
   const addQuestion = () => {
     const newQuestion = {
@@ -26,40 +26,61 @@ export default function Modal({ setModal, setQuiz }) {
       type: "text",
       answers: [""],
     };
-    setQuestion((prev) => [...prev, newQuestion]);
+    setQuest((prev) => ({
+      ...prev,
+      questions: [...prev.questions, newQuestion], 
+    }));
   };
 
   const updateQuestionText = (id, value) => {
-    setQuestion((prev) =>
-      prev.map((el) => (el.id === id ? { ...el, text: value } : el))
-    );
-  };
+  setQuest((prev) => ({
+    ...prev,
+    questions: prev.questions.map((el) =>
+      el.id === id ? { ...el, text: value } : el
+    ),
+  }));
+};
 
-  const updateQuestionType = (id, typeNew) => {
-    setQuestion((prev) =>
-      prev.map((el) => (el.id === id ? { ...el, type: typeNew || "text" } : el))
-    );
+const updateQuestionType = (id, typeNew) => {
+    setQuest((prev) => ({
+      ...prev,
+      questions: prev.questions.map((el) =>
+        el.id === id ? { ...el, type: typeNew || "text" } : el
+      ),
+    }));
   };
 
   const updateAnswers = (id, answersNew) => {
-    setQuestion((prev) =>
-      prev.map((el) =>
+    setQuest((prev) => ({
+      ...prev,
+      questions: prev.questions.map((el) =>
         el.id === id ? { ...el, answers: [...answersNew] } : el
-      )
-    );
+      ),
+    }));
   };
+
   const handleRemoveQuestion = (id) => {
-    setQuestion((prev) => prev.filter((el) => el.id !== id))
-  }
+  setQuest((prev) => ({
+    ...prev,
+    questions: prev.questions.filter((el) => el.id !== id),
+  }));
+};
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
-    const updatedQuest = { 
-      ...quest, 
-      questions: [...quest.questions, ...question] 
-    };
-    setQuiz((prev) => [...prev, updatedQuest]);
-    setModal(false);
+    e.preventDefault();
+    setQuiz((prev) =>
+      prev.map((el) =>
+        el.id === quest.id
+          ? {
+              ...el,
+              name: quest.name,
+              description: quest.description,
+              questions: quest.questions,
+            }
+          : el
+      )
+    );
+    setModalEdit(false);
   };
   // console.log(quest);
 
@@ -67,7 +88,7 @@ export default function Modal({ setModal, setQuiz }) {
     <div className="wrapper__modal">
       <div className="modal__header">
         <h1>Create Quiz</h1>
-        <div onClick={() => setModal(false)} className="close-btn">
+        <div onClick={() => setModalEdit(false)} className="close-btn">
           <span className="item-btn"></span>
           <span className="item-btn2"></span>
         </div>
@@ -100,7 +121,7 @@ export default function Modal({ setModal, setQuiz }) {
             />
           </div>
 
-          {question.map((el, index) => (
+          {quest.questions.map((el, index) => (
             <div key={el.id} className="modal__quest">
               <div className="quest-box">
                 <InputQuest
@@ -129,8 +150,7 @@ export default function Modal({ setModal, setQuiz }) {
                 <Checbox
                   answers={el.answers}
                   setAnswers={(updatedAnswers) => {
-                    // Обновляем ответы только для конкретного вопроса
-                    updateAnswers(el.id, updatedAnswers); // вызываем updateAnswers, а не setAnswers
+                    updateAnswers(el.id, updatedAnswers); 
                   }}
                 />
               )}
@@ -140,7 +160,9 @@ export default function Modal({ setModal, setQuiz }) {
         <button type="button" onClick={addQuestion} className="form-btn">
           Add question
         </button>
-        <button onSubmit={handleSubmit} className="submit">Submit</button>
+        <button onSubmit={handleSubmit} className="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
